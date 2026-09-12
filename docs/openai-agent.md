@@ -2,7 +2,7 @@
 
 The OpenAI GPT-Live session is configured in `src/lib/server/openaiConfig.ts` so its frontend prompt, backend prompt, and function schemas are versioned with the application.
 
-The voice session uses the exact `gpt-live-1` model with the `marin` voice. Its Responses delegation uses `gpt-5.6-terra` by default; set `OPENAI_INTELLIGENCE_MODEL` to use another compatible Responses model. Page-agent also uses `gpt-5.6-terra` through the server proxy; set `OPENAI_PAGE_AGENT_MODEL` to override it with a compatible Chat Completions model.
+The voice session uses the exact `gpt-live-1` model with the `marin` voice. Both text-model paths use `gpt-5.6-luna` with reasoning effort set to `none`: Responses delegation selects the browser tools, and page-agent uses Luna through the server proxy to plan DOM actions.
 
 The Responses backend exposes three browser-owned functions:
 

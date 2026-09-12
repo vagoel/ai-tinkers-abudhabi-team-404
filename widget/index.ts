@@ -96,15 +96,106 @@ function createUI() {
     border: "none",
     cursor: "pointer",
     color: "#fff",
-    background: "#06b6d4",
+    background: "linear-gradient(145deg, #22d3ee, #14b8a6)",
     boxShadow: "0 10px 30px rgba(6,182,212,0.5)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    transition: "transform .1s ease, background .2s ease",
+    position: "relative",
+    isolation: "isolate",
+    overflow: "visible",
+    transition: "transform .1s ease, background .25s ease, box-shadow .25s ease",
   } as CSSStyleDeclaration);
   btn.setAttribute("aria-label", "Start voice session");
-  btn.innerHTML = micSvg();
+
+  const halos = ["-8px", "-3px"].map((inset) => {
+    const halo = document.createElement("span");
+    Object.assign(halo.style, {
+      position: "absolute",
+      inset,
+      zIndex: "1",
+      borderRadius: "999px",
+      border: "1px solid rgba(103,232,249,0.65)",
+      opacity: "0",
+      pointerEvents: "none",
+    } as CSSStyleDeclaration);
+    return halo;
+  });
+
+  const wave = document.createElement("span");
+  Object.assign(wave.style, {
+    position: "relative",
+    zIndex: "2",
+    height: "26px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "2px",
+    pointerEvents: "none",
+  } as CSSStyleDeclaration);
+
+  const baseScales = [0.28, 0.48, 0.72, 1, 0.72, 0.48, 0.28];
+  const barAnimations = baseScales.map((baseScale, index) => {
+    const bar = document.createElement("span");
+    Object.assign(bar.style, {
+      width: "3px",
+      height: "24px",
+      borderRadius: "999px",
+      background: "rgba(255,255,255,0.96)",
+      boxShadow: "0 0 7px rgba(255,255,255,0.35)",
+      transform: `scaleY(${baseScale})`,
+      transformOrigin: "center",
+    } as CSSStyleDeclaration);
+    wave.appendChild(bar);
+    const animation = bar.animate(
+      [
+        { transform: `scaleY(${Math.max(0.22, baseScale * 0.55)})`, opacity: 0.65 },
+        { transform: "scaleY(1)", opacity: 1, offset: 0.45 },
+        { transform: `scaleY(${Math.max(0.38, baseScale * 0.72)})`, opacity: 0.82, offset: 0.7 },
+        { transform: `scaleY(${Math.max(0.22, baseScale * 0.55)})`, opacity: 0.65 },
+      ],
+      {
+        duration: 1050,
+        delay: index * -110,
+        easing: "ease-in-out",
+        iterations: Infinity,
+      }
+    );
+    animation.cancel();
+    return animation;
+  });
+
+  const haloAnimations = halos.map((halo, index) => {
+    const animation = halo.animate(
+      [
+        { opacity: 0, transform: "scale(0.82)" },
+        { opacity: 0.38, offset: 0.45 },
+        { opacity: 0, transform: "scale(1.42)" },
+      ],
+      {
+        duration: 1800,
+        delay: index * -900,
+        easing: "ease-out",
+        iterations: Infinity,
+      }
+    );
+    animation.cancel();
+    return animation;
+  });
+
+  function setWave(active: boolean, speaking = false) {
+    const rate = speaking ? 1.75 : 1;
+    for (const animation of [...barAnimations, ...haloAnimations]) {
+      if (active) {
+        animation.playbackRate = rate;
+        animation.play();
+      } else {
+        animation.cancel();
+      }
+    }
+  }
+
+  btn.append(...halos, wave);
 
   root.appendChild(label);
   root.appendChild(btn);
@@ -118,16 +209,25 @@ function createUI() {
       label.style.background = "rgba(24,24,27,0.92)";
       label.removeAttribute("title");
       if (state === "connected") {
-        btn.style.background = speaking ? "#ef4444" : "#f97316";
+        btn.style.background = speaking
+          ? "linear-gradient(145deg, #8b5cf6, #d946ef 52%, #22d3ee)"
+          : "linear-gradient(145deg, #22d3ee, #3b82f6 52%, #8b5cf6)";
+        btn.style.boxShadow = speaking
+          ? "0 12px 36px rgba(217,70,239,0.5)"
+          : "0 12px 36px rgba(59,130,246,0.45)";
         label.textContent = speaking ? "Speaking" : "Listening";
         btn.setAttribute("aria-label", "End voice session");
+        setWave(true, speaking);
       } else if (state === "connecting") {
-        btn.style.background = "#0891b2";
+        btn.style.background = "linear-gradient(145deg, #38bdf8, #4f46e5)";
         label.textContent = "Connecting…";
+        setWave(true);
       } else {
-        btn.style.background = "#06b6d4";
+        btn.style.background = "linear-gradient(145deg, #22d3ee, #14b8a6)";
+        btn.style.boxShadow = "0 10px 30px rgba(6,182,212,0.5)";
         label.textContent = "Tap to talk";
         btn.setAttribute("aria-label", "Start voice session");
+        setWave(false);
       }
     },
     setLabel(text: string) {
@@ -138,12 +238,20 @@ function createUI() {
       label.title = message;
       label.style.color = "#fecaca";
       label.style.background = "rgba(127,29,29,0.94)";
+      setWave(false);
     },
   };
 }
 
-function micSvg(): string {
-  return `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/></svg>`;
+function friendlyStartError(error: unknown): string {
+  if (error instanceof DOMException && error.name === "NotAllowedError") {
+    return "Microphone permission is blocked.";
+  }
+  const message = error instanceof Error ? error.message : String(error ?? "");
+  if (/failed to fetch|content security policy|security policy/i.test(message)) {
+    return "This site blocks the bookmark. Use the SightSpeak Chrome extension.";
+  }
+  return message || "The voice session could not start.";
 }
 
 // --- lifecycle --------------------------------------------------------------
@@ -162,6 +270,14 @@ async function mount() {
   let session: OpenAILiveSession | null = null;
   let status: LiveStatus = "disconnected";
 
+  function onPageWorking(event: Event) {
+    if (status !== "connected") return;
+    ui.setLabel(
+      (event as CustomEvent<boolean>).detail ? "Working on the page…" : "Listening"
+    );
+  }
+  window.addEventListener("sightspeak:page-working", onPageWorking);
+
   function stop() {
     session?.disconnect();
     session = null;
@@ -172,14 +288,15 @@ async function mount() {
     stop();
     ui.root.remove();
     window.__voiceWidgetMounted__ = false;
-    window.removeEventListener("voicelayer:unmount", unmount);
+    window.removeEventListener("sightspeak:unmount", unmount);
+    window.removeEventListener("sightspeak:page-working", onPageWorking);
     if (window.__voiceWidgetUnmount__ === unmount) {
       delete window.__voiceWidgetUnmount__;
     }
   }
 
   window.__voiceWidgetUnmount__ = unmount;
-  window.addEventListener("voicelayer:unmount", unmount);
+  window.addEventListener("sightspeak:unmount", unmount);
 
   async function start() {
     if (status !== "disconnected") return;
@@ -194,7 +311,7 @@ async function mount() {
       },
       onError: (message) => {
         console.error("[voice-widget]", message);
-        ui.setError(message);
+        ui.setError(friendlyStartError(message));
       },
     });
     try {
@@ -206,13 +323,7 @@ async function mount() {
     } catch (e) {
       console.error("[voice-widget] start failed", e);
       ui.setState("idle");
-      ui.setError(
-        e instanceof DOMException && e.name === "NotAllowedError"
-          ? "Microphone permission is blocked."
-          : e instanceof Error
-            ? e.message
-            : "The voice session could not start."
-      );
+      ui.setError(friendlyStartError(e));
     }
   }
 

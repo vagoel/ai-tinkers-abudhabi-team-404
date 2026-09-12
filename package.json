@@ -2,7 +2,7 @@
   "name": "ai-tinkers-abudhabi-team-404",
   "version": "1.0.0",
   "private": true,
-  "description": "VoiceLayer for the AI Tinkerers Abu Dhabi Agents Everywhere hackathon",
+  "description": "SightSpeak for the AI Tinkerers Abu Dhabi Agents Everywhere hackathon",
   "scripts": {
     "dev": "cross-env NODE_OPTIONS=--use-system-ca next dev",
     "build": "cross-env NODE_OPTIONS=--use-system-ca next build",
@@ -26,7 +26,8 @@
     "next": "^16.3.5",
     "openai": "^7.15.0",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",

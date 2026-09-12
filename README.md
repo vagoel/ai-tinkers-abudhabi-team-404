@@ -1,6 +1,10 @@
 # AI Tinkerers Abu Dhabi — Team 404
 
-VoiceLayer is a voice-first accessibility layer that can be added to a web page. A user can speak to read the page, scroll, click, fill forms, or search the live web.
+- **[SightSpeak website](https://ai-tinkers-abudhabi-team-404.vercel.app/)**
+- **[SightSpeak deck](https://ai-tinkers-abudhabi-team-404.vercel.app/deck)**
+- **[Download the SightSpeak extension](https://ai-tinkers-abudhabi-team-404.vercel.app/sightspeak-chrome-extension.zip)**
+
+SightSpeak is a voice-first accessibility assistant that can be added to a web page. A user can speak to read the page, scroll, click, fill forms, or search the live web.
 
 ## Links
 
@@ -53,7 +57,7 @@ Requires Node.js 20.9 or newer.
    ```
 
    The project intentionally uses the existing key names `OPEN_AI_KEY` and `EXA_KEY`. Optional model and proxy settings are documented in `.env.example`.
-   Page-agent's colored DOM overlay is disabled by default. Set `NEXT_PUBLIC_PAGE_AGENT_OVERLAY=true` to enable it temporarily.
+   Page-agent's animated cursor and navigation mask are enabled by default, while indexed-element bounding boxes and labels stay hidden. Set `NEXT_PUBLIC_PAGE_AGENT_OVERLAY=false` only to disable the cursor and mask for compatibility testing.
 
 3. Start the app:
 
@@ -69,7 +73,7 @@ Requires Node.js 20.9 or newer.
    npm run build:extension
    ```
 
-   Then open `chrome://extensions`, enable Developer mode, select **Load unpacked**, and choose `dist/chrome-extension`. Click the extension toolbar icon to add or remove VoiceLayer on the current page.
+   Then open `chrome://extensions`, enable Developer mode, select **Load unpacked**, and choose `dist/chrome-extension`. Click the extension toolbar icon to add or remove SightSpeak on the current page.
 
 5. Rebuild the standalone widget after changing its code or public proxy origin:
 
@@ -94,7 +98,7 @@ npm run build
 - `control_page(instruction)` asks page-agent to perform one concrete DOM action.
 - `search_web(query)` searches the live web through Exa and returns compact results for the voice model to summarize.
 
-The voice prompt requires explicit confirmation before form submission, booking, purchasing, sending messages, or other consequential actions. GPT-Live uses the exact `gpt-live-1` model. The prompt and tool schemas live in `src/lib/server/openaiConfig.ts`.
+The voice prompt requires explicit confirmation before form submission, booking, purchasing, sending messages, or other consequential actions. GPT-Live uses the exact `gpt-live-1` model for speech, while Responses delegation and page-agent planning use `gpt-5.6-luna` with reasoning effort set to `none` for lower latency. The prompt and tool schemas live in `src/lib/server/openaiConfig.ts`.
 
 ## Demo prompts
 

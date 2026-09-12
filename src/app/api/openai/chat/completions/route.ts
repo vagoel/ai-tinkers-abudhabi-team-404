@@ -20,14 +20,12 @@ export async function POST(req: Request) {
 
   // page-agent speaks the OpenAI Chat Completions protocol. Force the trusted
   // server-side model rather than allowing arbitrary models through this proxy.
-  body.model = process.env.OPENAI_PAGE_AGENT_MODEL || "gpt-5.6-terra";
+  body.model = "gpt-5.6-luna";
   if (typeof body.max_tokens === "number" && body.max_completion_tokens === undefined) {
     body.max_completion_tokens = body.max_tokens;
     delete body.max_tokens;
   }
-  if (Array.isArray(body.tools) && body.tools.length > 0) {
-    body.reasoning_effort = "none";
-  }
+  body.reasoning_effort = "none";
 
   try {
     const upstream = await fetch("https://api.openai.com/v1/chat/completions", {

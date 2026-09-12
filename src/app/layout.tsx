@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "VoiceLayer — Talk to any website",
+  title: "SightSpeak — Talk to any website",
   description:
     "A voice-first accessibility layer for any website. OpenAI voice and intelligence, page-agent actions, and Exa live web data.",
 };

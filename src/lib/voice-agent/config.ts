@@ -11,7 +11,7 @@ export interface VoiceAgentConfig {
   proxyBase: string;
   /** OpenAI-compatible endpoint used by page-agent. */
   pageAgent: PageAgentLLM;
-  /** Show page-agent's DOM highlights, tint, and automation mask. */
+  /** Show page-agent's animated automation cursor; DOM bounding boxes stay hidden. */
   enablePageAgentOverlay: boolean;
   language: "en-US";
 }
@@ -23,7 +23,7 @@ const defaults: VoiceAgentConfig = {
     baseURL: "/api/openai",
     apiKey: "server-proxy",
   },
-  enablePageAgentOverlay: false,
+  enablePageAgentOverlay: true,
   language: "en-US",
 };
 

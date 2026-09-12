@@ -23,7 +23,7 @@ loadEnv(".env.local");
 loadEnv(".env");
 
 const proxyBase = process.env.NEXT_PUBLIC_PROXY_BASE ?? "";
-const pageAgentOverlay = process.env.NEXT_PUBLIC_PAGE_AGENT_OVERLAY === "true";
+const pageAgentOverlay = process.env.NEXT_PUBLIC_PAGE_AGENT_OVERLAY !== "false";
 
 await build({
   entryPoints: [resolve(root, "widget/index.ts")],

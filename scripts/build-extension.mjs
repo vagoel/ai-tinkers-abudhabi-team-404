@@ -31,7 +31,7 @@ const configuredProxy =
   process.env.EXTENSION_PROXY_BASE ||
   process.env.NEXT_PUBLIC_PROXY_BASE ||
   "http://localhost:3000";
-const pageAgentOverlay = process.env.NEXT_PUBLIC_PAGE_AGENT_OVERLAY === "true";
+const pageAgentOverlay = process.env.NEXT_PUBLIC_PAGE_AGENT_OVERLAY !== "false";
 
 let proxyOrigin;
 try {
@@ -44,8 +44,8 @@ try {
 
 const distRoot = resolve(root, "dist");
 const extensionRoot = resolve(distRoot, "chrome-extension");
-const zipPath = resolve(distRoot, "voicelayer-chrome-extension.zip");
-const publicZipPath = resolve(root, "public", "voicelayer-chrome-extension.zip");
+const zipPath = resolve(distRoot, "sightspeak-chrome-extension.zip");
+const publicZipPath = resolve(root, "public", "sightspeak-chrome-extension.zip");
 
 rmSync(extensionRoot, { recursive: true, force: true });
 rmSync(zipPath, { force: true });

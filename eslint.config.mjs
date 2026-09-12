@@ -10,6 +10,7 @@ export default defineConfig([
     "out/**",
     "build/**",
     "dist/**",
+    "docs/ppt/vendor/**",
     "next-env.d.ts",
     "public/voice-widget.js",
   ]),

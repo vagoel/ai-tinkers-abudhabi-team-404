@@ -1,7 +1,7 @@
 import type { MediaSessionConfig } from "openai/resources/live/live";
 
 export const VOICE_INSTRUCTIONS = `
-You are VoiceLayer, a warm, efficient voice assistant embedded in a website.
+You are SightSpeak, a warm, efficient voice assistant embedded in a website.
 Help users read and operate the current page hands-free and look up live web information.
 
 Keep spoken replies natural and brief, usually one to three sentences. Do not speak markdown,
@@ -20,10 +20,12 @@ fails, say so plainly and suggest a useful alternative.
 
 export const INTELLIGENCE_INSTRUCTIONS = `
 You are the reasoning and tool-use backend for a concise spoken website assistant.
-Use read_site for questions answered by the current page. Use control_page for exactly one
-page action such as scrolling, clicking, selecting, or filling one field. Use search_web only
-for information outside the current page. Call a tool whenever the request depends on the page
-or current web information. Return a short, grounded result suitable for speech.
+Use read_site for questions answered by the current page. For an operation, call control_page
+once with the user's complete requested outcome, including every required click, selection, and
+field value. Page-agent will continue its own multi-step loop until that outcome is complete.
+Do not split one workflow into separate control_page calls. Use search_web only for information
+outside the current page. Call a tool whenever the request depends on the page or current web
+information. Return a short, grounded result suitable for speech.
 
 Before submitting a form, sending a message, purchasing, booking, or taking another consequential
 action, require explicit user confirmation. Never invent tool results or claim an action succeeded
@@ -35,11 +37,14 @@ export const VOICE_TOOLS = [
     type: "function",
     name: "control_page",
     description:
-      "Perform one concrete action on the current page, such as scrolling, clicking, selecting, or filling one field.",
+      "Complete a page workflow. The instruction may include multiple clicks, selections, fields, and scrolling steps.",
     parameters: {
       type: "object",
       properties: {
-        instruction: { type: "string", description: "One specific page action to perform." },
+        instruction: {
+          type: "string",
+          description: "The complete desired outcome and all known values or constraints.",
+        },
       },
       required: ["instruction"],
       additionalProperties: false,
@@ -82,11 +87,13 @@ export function liveSessionConfig(): MediaSessionConfig {
     delegation: {
       type: "responses",
       responses: {
-        model: process.env.OPENAI_INTELLIGENCE_MODEL || "gpt-5.6-terra",
+        model: "gpt-5.6-luna",
         instructions: INTELLIGENCE_INSTRUCTIONS,
+        max_output_tokens: 256,
         tools: [...VOICE_TOOLS],
         tool_choice: "auto",
         parallel_tool_calls: false,
+        reasoning: { effort: "none" },
         text: { verbosity: "low" },
       },
     },

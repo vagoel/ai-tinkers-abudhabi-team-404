@@ -1,7 +1,7 @@
 <!-- .slide: class="cover" -->
 <div class="cover-grid">
   <div class="cover-copy">
-    <p class="eyebrow">VoiceLayer prototype · Team 404</p>
+    <p class="eyebrow">SightSpeak prototype · Team 404</p>
     <h1>Sight<span>Speak</span></h1>
     <p class="tagline">Every webpage, ready to listen and act</p>
   </div>
@@ -142,11 +142,11 @@ The implementation refreshes its readable page context from the current DOM afte
   <h2>Voice to a safe page action</h2>
 </div>
 <div class="flow-map">
-  <div class="flow-step fragment fade-up" data-fragment-index="1"><b>01</b><span>Add the<br>voice layer</span></div>
+  <div class="flow-step fragment fade-up" data-fragment-index="1"><b>01</b><span>Add<br>SightSpeak</span></div>
   <div class="flow-link fragment fade-in" data-fragment-index="1"></div>
   <div class="flow-step live fragment fade-up" data-fragment-index="2"><b>02</b><span>GPT-Live<br>hears the request</span></div>
   <div class="flow-link fragment fade-in" data-fragment-index="2"></div>
-  <div class="flow-step terra fragment fade-up" data-fragment-index="3"><b>03</b><span>GPT-5.6 Terra<br>chooses a tool</span></div>
+  <div class="flow-step luna fragment fade-up" data-fragment-index="3"><b>03</b><span>GPT-5.6 Luna<br>chooses a tool</span></div>
   <div class="flow-link fragment fade-in" data-fragment-index="3"></div>
   <div class="flow-step exa fragment fade-up" data-fragment-index="4"><b>04</b><span>Live DOM or Exa<br>resolves context</span></div>
   <div class="flow-link fragment fade-in" data-fragment-index="4"></div>
@@ -157,7 +157,7 @@ The implementation refreshes its readable page context from the current DOM afte
 </div>
 
 Notes:
-GPT-Live handles the real-time voice exchange. GPT-5.6 Terra selects the appropriate tool. The live DOM answers page questions, Exa supports off-page web search, and page-agent performs the DOM action. The agent asks for confirmation before consequential actions such as submitting a form or making a booking.
+GPT-Live handles the real-time voice exchange. GPT-5.6 Luna selects the appropriate tool without a reasoning pass. The live DOM answers page questions, Exa supports off-page web search, and page-agent performs the DOM action. The agent asks for confirmation before consequential actions such as submitting a form or making a booking.
 
 ---
 
@@ -170,14 +170,14 @@ GPT-Live handles the real-time voice exchange. GPT-5.6 Terra selects the appropr
   <div class="arch-input"><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i></div><p>User speaks</p></div>
   <div class="arch-node live-node"><p class="node-kicker">Voice conversation</p><h3>GPT-Live</h3><span>interprets intent</span></div>
   <div class="arch-context"><p class="node-kicker">Grounded data</p><h3>Live DOM + Exa</h3><span>reads the page · searches the web</span></div>
-  <div class="arch-node terra-node"><p class="node-kicker">Tool choice</p><h3>GPT-5.6 Terra</h3><span>uses Responses delegation</span></div>
+  <div class="arch-node luna-node"><p class="node-kicker">Tool choice</p><h3>GPT-5.6 Luna</h3><span>uses Responses delegation</span></div>
   <div class="arch-output"><div class="dom-mark"><i></i><i></i><i></i></div><p>page-agent acts</p></div>
   <div class="arch-line l1"></div><div class="arch-line l2"></div><div class="arch-line l3"></div><div class="arch-line l4"></div>
 </div>
 <p class="scene-caption">The live DOM grounds the page. Exa adds information beyond it.</p>
 
 Notes:
-The implementation keeps the roles separate. GPT-Live runs the real-time speech exchange. GPT-5.6 Terra uses the Responses backend to select browser-owned tools. The live DOM grounds the open page, Exa retrieves off-page information, and page-agent operates the page through the server-backed planning loop.
+The implementation keeps the roles separate. GPT-Live runs the real-time speech exchange. GPT-5.6 Luna uses the Responses backend to select browser-owned tools without a reasoning pass. The live DOM grounds the open page, Exa retrieves off-page information, and page-agent operates the page through the server-backed planning loop.
 
 ---
 
@@ -186,9 +186,9 @@ The implementation keeps the roles separate. GPT-Live runs the real-time speech 
   <p class="eyebrow">SIGHTSPEAK</p>
   <h2>Every webpage, ready<br>to <span>listen and act</span></h2>
   <div class="closing-orbit"><div class="eye-mark"><span></span></div><div class="wave wave-cover"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-  <p class="closing-note">VoiceLayer prototype · Team 404</p>
-  <p class="tech-note">Built around GPT-Live 1, GPT-5.6 Terra, page-agent, live DOM context, and Exa web search.</p>
+  <p class="closing-note">SightSpeak prototype · Team 404</p>
+  <p class="tech-note">Built around GPT-Live 1, GPT-5.6 Luna, page-agent, live DOM context, and Exa web search.</p>
 </div>
 
 Notes:
-Close on the product promise. SightSpeak is the VoiceLayer prototype that keeps people on the page while voice, current context, and page actions work together.
+Close on the product promise. SightSpeak keeps people on the page while voice, current context, and page actions work together.

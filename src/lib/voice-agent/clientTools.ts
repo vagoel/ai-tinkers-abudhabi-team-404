@@ -16,6 +16,11 @@ export type ClientToolFn = (
 ) => Promise<string | number | void> | string | number | void;
 export type ClientToolMap = Record<string, ClientToolFn>;
 
+function setPageWorking(active: boolean): void {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new CustomEvent("sightspeak:page-working", { detail: active }));
+}
+
 // --- current-page grounding -------------------------------------------------
 
 let siteContext = "";
@@ -94,10 +99,15 @@ export function buildClientTools(): ClientToolMap {
     control_page: async ({ instruction }) => {
       const text = String(instruction ?? "").trim();
       if (!text) return "No instruction was provided.";
-      const result = await runPageCommand(text);
-      // Page actions can reveal or change content, so keep read_site current.
-      await groundFromCurrentPage();
-      return result;
+      setPageWorking(true);
+      try {
+        const result = await runPageCommand(text);
+        // Page actions can reveal or change content, so keep read_site current.
+        await groundFromCurrentPage();
+        return result;
+      } finally {
+        setPageWorking(false);
+      }
     },
 
     search_web: async ({ query }) => {
