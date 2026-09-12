@@ -14,6 +14,10 @@ Built for AI Tinkerers Abu Dhabi — Team 404.
 
 ## Links
 
+- **Video demo:** https://youtu.be/xQ7STxtgU9M
+- **Main website:** https://ai-tinkers-abudhabi-team-404.vercel.app/
+- **Live demo:** https://ai-tinkers-abudhabi-team-404.vercel.app/demo
+- **Pitch deck:** https://ai-tinkers-abudhabi-team-404.vercel.app/deck
 - **Repository:** https://github.com/vagoel/ai-tinkers-abudhabi-team-404
 - **Hackathon:** https://abu-dhabi.aitinkerers.org/p/agents-everywhere-bots-channels-more-global-hackathon
 - **OpenAI:** https://platform.openai.com/
