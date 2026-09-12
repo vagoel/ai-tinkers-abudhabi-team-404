@@ -8,6 +8,9 @@ VoiceLayer is a voice-first accessibility layer that can be added to a web page.
 - **Hackathon:** https://abu-dhabi.aitinkerers.org/p/agents-everywhere-bots-channels-more-global-hackathon
 - **OpenAI:** https://platform.openai.com/
 - **Exa:** https://dashboard.exa.ai/
+- **OpenRouter sponsor:** https://openrouter.ai/
+- **Exa agent skills:** https://github.com/exa-labs/agent-skills
+- **Message from sponsors (YouTube):** https://youtu.be/XV4gXDUpmqw?si=VWg6GP-TWqm3Gq2h
 
 ## Architecture
 
