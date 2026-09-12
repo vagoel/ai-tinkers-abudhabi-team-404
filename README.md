@@ -1,10 +1,16 @@
-# AI Tinkerers Abu Dhabi — Team 404
+# SightSpeak
+
+Every webpage, ready to listen and act.
 
 <p align="center">
-  <img src="assets/voicelayer-thumbnail.png" alt="SightSpeak voice-to-safe-page-action flow" width="1200">
+  <img src="assets/sightspeak-thumbnail.png" alt="SightSpeak voice-to-safe-page-action flow" width="1200">
 </p>
 
-SightSpeak is a voice-first accessibility layer that can be added to a web page. The working prototype, VoiceLayer, lets a user speak to read the page, scroll, click, fill forms, or search the live web.
+SightSpeak gives any webpage a voice interface and an agentic action layer. It can be added as an embedded widget or Chrome extension, so a person can speak to read the page, scroll, click, fill forms, navigate, or search the live web.
+
+People naturally use conversation to ask for help, yet webpages often require a specific language, visual reading, and controls that take time to learn. SightSpeak lets a person express a goal in their own words and complete the task on the page without depending on someone else to navigate it.
+
+Built for AI Tinkerers Abu Dhabi — Team 404.
 
 ## Links
 
@@ -73,7 +79,7 @@ Requires Node.js 20.9 or newer.
    npm run build:extension
    ```
 
-   Then open `chrome://extensions`, enable Developer mode, select **Load unpacked**, and choose `dist/chrome-extension`. Click the extension toolbar icon to add or remove VoiceLayer on the current page.
+   Then open `chrome://extensions`, enable Developer mode, select **Load unpacked**, and choose `dist/chrome-extension`. Click the extension toolbar icon to add or remove SightSpeak on the current page.
 
 5. Rebuild the standalone widget after changing its code or public proxy origin:
 
@@ -110,6 +116,7 @@ The voice prompt requires explicit confirmation before form submission, booking,
 ## Limitations
 
 - Microphone access requires HTTPS or localhost.
+- Multilingual voice interaction is a target use case and needs validation beyond the current `en-US` configuration.
 - Some sites block injected scripts through Content Security Policy.
 - Cross-page navigation unloads an injected widget unless the destination also includes it.
 - The demo booking form is illustrative and does not submit to a backend.
