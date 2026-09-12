@@ -1,10 +1,10 @@
 # AI Tinkerers Abu Dhabi — Team 404
 
 <p align="center">
-  <img src="assets/voicelayer-thumbnail.png" alt="VoiceLayer voice-to-safe-page-action flow" width="1200">
+  <img src="assets/voicelayer-thumbnail.png" alt="SightSpeak voice-to-safe-page-action flow" width="1200">
 </p>
 
-VoiceLayer is a voice-first accessibility layer that can be added to a web page. A user can speak to read the page, scroll, click, fill forms, or search the live web.
+SightSpeak is a voice-first accessibility layer that can be added to a web page. The working prototype, VoiceLayer, lets a user speak to read the page, scroll, click, fill forms, or search the live web.
 
 ## Links
 
