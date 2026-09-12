@@ -1,0 +1,43 @@
+{
+  "name": "ai-tinkers-abudhabi-team-404",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VoiceLayer for the AI Tinkerers Abu Dhabi Agents Everywhere hackathon",
+  "scripts": {
+    "dev": "cross-env NODE_OPTIONS=--use-system-ca next dev",
+    "build": "cross-env NODE_OPTIONS=--use-system-ca next build",
+    "build:extension": "node scripts/build-extension.mjs",
+    "build:widget": "node scripts/build-widget.mjs",
+    "start": "cross-env NODE_OPTIONS=--use-system-ca next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vagoel/ai-tinkers-abudhabi-team-404.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vagoel/ai-tinkers-abudhabi-team-404/issues"
+  },
+  "homepage": "https://github.com/vagoel/ai-tinkers-abudhabi-team-404#readme",
+  "dependencies": {
+    "@page-agent/core": "^1.12.2",
+    "@page-agent/page-controller": "^1.12.2",
+    "next": "^16.3.5",
+    "openai": "^7.15.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.1.2",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "cross-env": "^10.1.0",
+    "esbuild": "^0.28.1",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.5",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  }
+}

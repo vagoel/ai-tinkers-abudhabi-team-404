@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "VoiceLayer — GPT-Live",
+  "version": "1.0.0",
+  "description": "Talk to the current webpage with OpenAI GPT-Live, page-agent, and Exa.",
+  "minimum_chrome_version": "120",
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": ["__VOICE_PROXY_HOST_PERMISSION__"],
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "action": {
+    "default_title": "Toggle VoiceLayer on this page"
+  }
+}
