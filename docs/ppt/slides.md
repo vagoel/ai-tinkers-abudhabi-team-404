@@ -24,13 +24,13 @@ SightSpeak is a hackathon prototype that gives a webpage a voice interface and a
 <!-- .slide: class="why" -->
 <div class="slide-head">
   <p class="eyebrow">WHY</p>
-  <h2>The web expects sight and touch</h2>
+  <h2>Speaking is how people ask for help</h2>
 </div>
 <div class="intent-scene">
   <div class="voice-intent">
-    <p class="spoken">“Book an appointment for Tuesday”</p>
+    <p class="spoken">“Can you help me book an appointment?”</p>
     <div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <p>Voice carries the goal</p>
+    <p>Voice carries a person’s goal and request for help.</p>
   </div>
   <div class="intent-path"><span></span><span></span><span></span></div>
   <div class="browser-shell dense-page">
@@ -39,17 +39,17 @@ SightSpeak is a hackathon prototype that gives a webpage a voice interface and a
     <div class="cursor-mark">?</div>
   </div>
 </div>
-<p class="scene-caption">But the page hides the path in controls, labels, and changing layouts.</p>
+<p class="scene-caption">People have used conversation to get things done for centuries. A webpage should not end that conversation.</p>
 
 Notes:
-Set up the core problem: people know what they want to do, but conventional webpages make them visually discover controls and operate them by touch or pointer.
+Start with a familiar human behavior: people speak when they need help. They explain what they want, ask a follow-up, and get on with their day. Digital systems replace that natural exchange with controls users must first learn to find and operate.
 
 ---
 
 <!-- .slide: class="why" -->
 <div class="slide-head">
   <p class="eyebrow">WHY</p>
-  <h2>Language and layout can both block a task</h2>
+  <h2>A simple ask can become a dependency</h2>
 </div>
 <div class="twin-scenes">
   <div class="scenario accessibility">
@@ -59,25 +59,26 @@ Set up the core problem: people know what they want to do, but conventional webp
       <div class="browser-lines"><em></em><strong></strong><em></em></div>
       <div class="hidden-control">?</div>
     </div>
-    <h3>Language</h3>
-    <p>Speak naturally in your own language. Voice offers another way to ask when usual controls are hard to use.</p>
+    <h3>The barrier</h3>
+    <p>A page may demand a specific language, visual reading, and controls someone has never learned to use.</p>
   </div>
   <div class="scenario change">
     <div class="mini-pages" aria-hidden="true"><span></span><span></span></div>
-    <div class="re-read">re-read</div>
-    <h3>Layout</h3>
-    <p>A changed interface needs current DOM context, not fixed coordinates.</p>
+    <div class="re-read">changed</div>
+    <h3>The cost</h3>
+    <p>When a person cannot finish alone, an everyday task can require help from someone else.</p>
   </div>
 </div>
+<p class="scene-caption">A task that should be simple can cost a person privacy and autonomy.</p>
 
 Notes:
-SightSpeak aims to reduce two barriers at once: language should not stop someone from asking for help, and an interface redesign should not leave the agent following stale positions.
+Not every person can rely on a keyboard, a mouse, or a visual interface. Language, accessibility needs, unfamiliar controls, and changing layouts can turn a routine task into a request for assistance. The stakes are personal: privacy, confidence, and independence.
 
 ---
 
-<!-- .slide: class="how" -->
+<!-- .slide: class="what" -->
 <div class="slide-head">
-  <p class="eyebrow">HOW</p>
+  <p class="eyebrow">WHAT</p>
   <h2>A guide inside every webpage</h2>
 </div>
 <div class="guide-scene">
@@ -98,6 +99,40 @@ SightSpeak aims to reduce two barriers at once: language should not stop someone
 
 Notes:
 The working implementation exposes two browser entry points: an injectable widget and a Chrome extension. Users stay on the page they already use.
+
+---
+
+<!-- .slide: class="what" -->
+<div class="slide-head">
+  <p class="eyebrow">WHAT</p>
+  <h2>Speak your language. Finish the task.</h2>
+</div>
+<div class="task-scenes">
+  <div class="task fill-task"><div class="task-icon form-icon"><i></i><i></i><i></i><b>✓</b></div><p class="task-ask" lang="ar" dir="rtl">“املأ بياناتي”</p><h3>Complete a form</h3></div>
+  <div class="task find-task"><div class="task-icon find-icon"><i></i><b></b></div><p class="task-ask" lang="hi">“पॉलिसी की तारीख ढूँढें”</p><h3>Find a detail</h3></div>
+  <div class="task go-task"><div class="task-icon go-icon"><i></i><i></i><b></b></div><p class="task-ask">“Take me to billing”</p><h3>Navigate a page</h3></div>
+</div>
+<p class="scene-caption">The language can change. The task on the page still gets done.</p>
+
+Notes:
+This is the accessibility and inclusion use case. A user should be able to express a goal in the language they are comfortable speaking, then let the assistant turn that goal into a page action. The prototype's voice flow and page agent should be validated with multilingual test prompts before this is presented as a confirmed production capability.
+
+---
+
+<!-- .slide: class="what" -->
+<div class="slide-head">
+  <p class="eyebrow">WHAT</p>
+  <h2>Current context for changing pages</h2>
+</div>
+<div class="refresh-scene">
+  <div class="browser-shell old-page"><div class="browser-top"><i></i><i></i><i></i><b></b></div><div class="old-layout"><em></em><strong></strong><em></em><em></em><u></u></div><p>Yesterday</p></div>
+  <div class="context-refresh"><div class="refresh-ring"><span>Live DOM</span></div><p>Re-read the current page</p></div>
+  <div class="browser-shell new-page"><div class="browser-top"><i></i><i></i><i></i><b></b></div><div class="new-layout"><strong></strong><em></em><em></em><u></u><em></em></div><p>Today</p></div>
+  <div class="dom-route"><span></span><span></span><span></span><b>DOM action</b></div>
+</div>
+
+Notes:
+The implementation refreshes its readable page context from the current DOM after page actions. That grounds the next request in the version of the interface the user now sees rather than a saved screen position.
 
 ---
 
@@ -143,40 +178,6 @@ GPT-Live handles the real-time voice exchange. GPT-5.6 Terra selects the appropr
 
 Notes:
 The implementation keeps the roles separate. GPT-Live runs the real-time speech exchange. GPT-5.6 Terra uses the Responses backend to select browser-owned tools. The live DOM grounds the open page, Exa retrieves off-page information, and page-agent operates the page through the server-backed planning loop.
-
----
-
-<!-- .slide: class="what" -->
-<div class="slide-head">
-  <p class="eyebrow">WHAT</p>
-  <h2>Speak your language. Finish the task.</h2>
-</div>
-<div class="task-scenes">
-  <div class="task fill-task"><div class="task-icon form-icon"><i></i><i></i><i></i><b>✓</b></div><p class="task-ask" lang="ar" dir="rtl">“املأ بياناتي”</p><h3>Complete a form</h3></div>
-  <div class="task find-task"><div class="task-icon find-icon"><i></i><b></b></div><p class="task-ask" lang="hi">“पॉलिसी की तारीख ढूँढें”</p><h3>Find a detail</h3></div>
-  <div class="task go-task"><div class="task-icon go-icon"><i></i><i></i><b></b></div><p class="task-ask">“Take me to billing”</p><h3>Navigate a page</h3></div>
-</div>
-<p class="scene-caption">The language can change. The task on the page still gets done.</p>
-
-Notes:
-This is the accessibility and inclusion use case. A user should be able to express a goal in the language they are comfortable speaking, then let the assistant turn that goal into a page action. The prototype's voice flow and page agent should be validated with multilingual test prompts before this is presented as a confirmed production capability.
-
----
-
-<!-- .slide: class="what" -->
-<div class="slide-head">
-  <p class="eyebrow">WHAT</p>
-  <h2>Current context for changing pages</h2>
-</div>
-<div class="refresh-scene">
-  <div class="browser-shell old-page"><div class="browser-top"><i></i><i></i><i></i><b></b></div><div class="old-layout"><em></em><strong></strong><em></em><em></em><u></u></div><p>Yesterday</p></div>
-  <div class="context-refresh"><div class="refresh-ring"><span>Live DOM</span></div><p>Re-read the current page</p></div>
-  <div class="browser-shell new-page"><div class="browser-top"><i></i><i></i><i></i><b></b></div><div class="new-layout"><strong></strong><em></em><em></em><u></u><em></em></div><p>Today</p></div>
-  <div class="dom-route"><span></span><span></span><span></span><b>DOM action</b></div>
-</div>
-
-Notes:
-The implementation refreshes its readable page context from the current DOM after page actions. That grounds the next request in the version of the interface the user now sees rather than a saved screen position.
 
 ---
 
