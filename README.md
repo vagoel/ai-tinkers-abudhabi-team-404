@@ -1,10 +1,16 @@
-# AI Tinkerers Abu Dhabi — Team 404
+# SightSpeak
 
-- **[SightSpeak website](https://ai-tinkers-abudhabi-team-404.vercel.app/)**
-- **[SightSpeak deck](https://ai-tinkers-abudhabi-team-404.vercel.app/deck)**
-- **[Download the SightSpeak extension](https://ai-tinkers-abudhabi-team-404.vercel.app/sightspeak-chrome-extension.zip)**
+Every webpage, ready to listen and act.
 
-SightSpeak is a voice-first accessibility assistant that can be added to a web page. A user can speak to read the page, scroll, click, fill forms, or search the live web.
+<p align="center">
+  <img src="assets/sightspeak-thumbnail.png" alt="SightSpeak voice-to-safe-page-action flow" width="1200">
+</p>
+
+SightSpeak gives any webpage a voice interface and an agentic action layer. It can be added as an embedded widget or Chrome extension, so a person can speak to read the page, scroll, click, fill forms, navigate, or search the live web.
+
+People naturally use conversation to ask for help, yet webpages often require a specific language, visual reading, and controls that take time to learn. SightSpeak lets a person express a goal in their own words and complete the task on the page without depending on someone else to navigate it.
+
+Built for AI Tinkerers Abu Dhabi — Team 404.
 
 ## Links
 
@@ -110,6 +116,7 @@ The voice prompt requires explicit confirmation before form submission, booking,
 ## Limitations
 
 - Microphone access requires HTTPS or localhost.
+- Multilingual voice interaction is a target use case and needs validation beyond the current `en-US` configuration.
 - Some sites block injected scripts through Content Security Policy.
 - Cross-page navigation unloads an injected widget unless the destination also includes it.
 - The demo booking form is illustrative and does not submit to a backend.
