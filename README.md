@@ -25,6 +25,7 @@ Built for AI Tinkerers Abu Dhabi — Team 404.
 - **OpenRouter sponsor:** https://openrouter.ai/
 - **Exa agent skills:** https://github.com/exa-labs/agent-skills
 - **Message from sponsors (YouTube):** https://youtu.be/XV4gXDUpmqw?si=VWg6GP-TWqm3Gq2h
+- **Event photos:** https://drive.google.com/drive/folders/1EMqcGJf-qrbXs3IQCIIDb6MOhYnYwVEL
 
 ## Architecture
 
